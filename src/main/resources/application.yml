@@ -1,0 +1,51 @@
+
+#spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+#spring.datasource.username=root
+#spring.datasource.password=123456
+#spring.datasource.url=jdbc:mariadb://localhost:3306/board
+
+
+server:
+  port: 9991
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/Board
+    username: min
+    password: p123456
+
+  jpa:
+    database: mysql
+    generate-ddl: true
+    show-sql: true
+
+  thymeleaf:
+    cache: false
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+    view-names: thymeleaf/*
+
+springdoc:
+  packages-to-scan: com.mbti.presentation.controller
+  swagger-ui.path: /api-docs
+  swagger-ui.tags-sorter: alpha
+  swagger-ui.operations-sorter: alpha
+  api-docs.path: /api-docs/json
+  api-docs.groups.enabled: true
+  cache.disabled: true
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+jwt:
+  token:
+    secret: hello
+
