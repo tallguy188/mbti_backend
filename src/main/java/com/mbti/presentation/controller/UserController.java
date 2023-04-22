@@ -33,7 +33,7 @@ public class UserController {
     public ResponseEntity<Response<UserDto.UserLoginResponse>> login(@RequestBody UserDto.UserRequestDto userRequestDto) {
 
 
-        String token = userService.login(userRequestDto);
-        return ResponseEntity.ok().body(Response.success(new UserDto.UserLoginResponse(token)));
+       UserDto.UserLoginResponse user = userService.login(userRequestDto);
+        return ResponseEntity.ok().body(Response.success(new UserDto.UserLoginResponse(user.getToken(), user.getMbti())));
     }
 }

@@ -55,7 +55,7 @@ public class UserService {
 
 
     // 로그인
-    public String login(UserDto.UserRequestDto userRequestDto) throws UsernameNotFoundException {
+    public UserDto.UserLoginResponse login(UserDto.UserRequestDto userRequestDto) throws UsernameNotFoundException {
 
         // db에서 유저이름 확인
         User user = userRepository.findByUserNick(userRequestDto.getNick())
@@ -68,8 +68,11 @@ public class UserService {
             throw new UserJoinLoginException(ErrorCode.INVALID_PASSWORD,String.format("비밀번호가 일치하지 않습니다"));
         }
 
+
+        String usertoken =JwtTokenUtil.createToken(user.getUserNick(),expireTimeMs,secretKey);
         // 두가지 모두 통과하면 토큰 발행
-        return JwtTokenUtil.createToken(user.getUserNick(),expireTimeMs,secretKey);
+        return UserDto.UserLoginResponse.builder().token(usertoken)
+                .mbti(user.getUserMbti()).build();
     }
 
 
