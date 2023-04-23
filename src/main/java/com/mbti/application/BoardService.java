@@ -8,6 +8,8 @@ import com.mbti.presentation.dto.BoardDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -15,24 +17,24 @@ public class BoardService {
     private final UserRepository userRepository;
 
     private final BoardRepository boardRepository;
-
-
-
-    public BoardDto.BoardResponseDto postsave(BoardDto.BoardRequestDto boardRequestDto) {
-
+    // 게시글 저장
+    public BoardDto.boardSaveResponseDto boardSave(BoardDto.boardSaveRequestDto boardSaveRequestDto) {
         Board board = boardRepository.save(
                 Board.builder()
-                        .articleTitle(boardRequestDto.getContent())
-                        .articleContent(boardRequestDto.getContent())
-                        .regDate(boardRequestDto.getRegdate())
-                        .articleType(boardRequestDto.getMbti())
-                        .articleWriter(boardRequestDto.getNick())
+                        .articleTitle(boardSaveRequestDto.getContent())
+                        .articleContent(boardSaveRequestDto.getContent())
+                        .regDate(boardSaveRequestDto.getRegdate())
+                        .articleType(boardSaveRequestDto.getMbti())
+                        .articleWriter(boardSaveRequestDto.getNick())
                         .build());
+        return BoardDto.boardSaveResponseDto.builder().id(board.getArticleId()).build();
+    }
 
+    public void boardDelete(Integer id) {
 
+        boardRepository.deleteById(id);
 
-        return BoardDto.BoardResponseDto.builder().id(board.getArticleId()).build();
-
+        return ;
     }
 
 }

@@ -9,10 +9,9 @@ import com.mbti.presentation.dto.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Table;
 
@@ -25,14 +24,19 @@ public class BoardController {
 
     @Operation(summary = "게시글 저장 메소드", description = "게시글 저장 메소드입니다.")
     @PostMapping("/boardwrite")
-    public ResponseEntity<Response<BoardDto.BoardResponseDto>>postsave(@RequestBody BoardDto.BoardRequestDto boardRequestDto){
+    public ResponseEntity<Response<BoardDto.boardSaveResponseDto>>boardSave(@RequestBody BoardDto.boardSaveRequestDto boardSaveRequestDto){
+        BoardDto.boardSaveResponseDto board = boardService.boardSave(boardSaveRequestDto);
+        return ResponseEntity.ok().body(Response.success(new BoardDto.boardSaveResponseDto(board.getId())));
+    }
+
+    @Operation(summary = "게시글 삭제 메소드", description = "게시글 삭제 메소드입니다.")
+    @DeleteMapping("/board/:{id}")
+    public ResponseEntity<Response>boardDelete(@PathVariable Integer id) {
 
 
-        BoardDto.BoardResponseDto board = boardService.postsave(boardRequestDto);
-        return ResponseEntity.ok().body(Response.success(new BoardDto.BoardResponseDto(board.getId())));
+        boardService.boardDelete(id);
 
-
-
+        return ResponseEntity.ok().body(Response.success(HttpStatus.OK));
 
 
     }

@@ -1,13 +1,14 @@
 package com.mbti.domain.entity;
 
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
+
+@Getter
+@Setter
 @Data
 @Entity
 @NoArgsConstructor

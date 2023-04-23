@@ -12,7 +12,7 @@ public class BoardDto {
     @Getter
     @AllArgsConstructor
     @Builder
-    public static class BoardRequestDto{
+    public static class boardSaveRequestDto{
 
         private String title;
 
@@ -23,14 +23,22 @@ public class BoardDto {
         private String regdate;
 
         private String mbti;
+
+
     }
 
     @Getter
     @AllArgsConstructor
     @Builder
-    public static class BoardResponseDto {
+    public static class boardSaveResponseDto {
         private Integer id;
     }
 
 
+//    @Getter
+//    @AllArgsConstructor
+//    @Builder
+//    public static class boardDeleteRequestDto {
+//        private Integer id;
+//    }
 }
