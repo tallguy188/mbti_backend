@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Table;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor  // 필드생성자자동주입
@@ -30,15 +31,19 @@ public class BoardController {
     }
 
     @Operation(summary = "게시글 삭제 메소드", description = "게시글 삭제 메소드입니다.")
-    @DeleteMapping("/board/:{id}")
+    @DeleteMapping("/board/{id}")
     public ResponseEntity<Response>boardDelete(@PathVariable Integer id) {
 
-
         boardService.boardDelete(id);
-
         return ResponseEntity.ok().body(Response.success(HttpStatus.OK));
 
+    }
 
+    @Operation(summary = "게시물 전체 조회 메소드", description = "게시물 전체 조회 메소드입니다.")
+    @GetMapping("/board")
+    public List<BoardDto.boardDetailResponseDto> boardSearchAll() {
+
+        return boardService.boardSearchAll();
     }
 
 }
