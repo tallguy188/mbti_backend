@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -40,6 +41,9 @@ public class Board {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+
+    @OneToMany(mappedBy = "board",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    private List<Comment> comments;
 
     @Builder
     public Board( String articleTitle, String articleContent, String regDate, String articleType,String articleWriter){

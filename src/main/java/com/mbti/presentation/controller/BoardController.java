@@ -2,10 +2,10 @@ package com.mbti.presentation.controller;
 
 
 import com.mbti.application.BoardService;
-import com.mbti.domain.entity.Board;
+
 import com.mbti.presentation.dto.BoardDto;
 import com.mbti.presentation.dto.Response;
-import com.mbti.presentation.dto.UserDto;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -13,12 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Table;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor  // 필드생성자자동주입
-@Tag(name="게시글관리",description = "게시글 관리 api입니다.")
 public class BoardController {
 
     private final BoardService boardService;
@@ -33,10 +31,8 @@ public class BoardController {
     @Operation(summary = "게시글 삭제 메소드", description = "게시글 삭제 메소드입니다.")
     @DeleteMapping("/board/{id}")
     public ResponseEntity<Response>boardDelete(@PathVariable Integer id) {
-
         boardService.boardDelete(id);
         return ResponseEntity.ok().body(Response.success(HttpStatus.OK));
-
     }
 
     @Operation(summary = "게시물 전체 조회 메소드", description = "게시물 전체 조회 메소드입니다.")
