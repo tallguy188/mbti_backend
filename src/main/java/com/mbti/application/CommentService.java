@@ -27,19 +27,24 @@ public class CommentService {
 
 
         Optional<User> user = userRepository.findByUserNick(commentSaveRequestDto.getWriter());
-
-
         Board board = boardRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
+
+
+
+        commentSaveRequestDto.setUser(user);
+        commentSaveRequestDto.setBoard(board);
+
         Comment comment = commentRepository.save(
                 Comment.builder()
                         .comContent(commentSaveRequestDto.getContent())
                         .comRegdate(commentSaveRequestDto.getRegdate())
                         .comWriter(commentSaveRequestDto.getWriter())
+                        .board(commentSaveRequestDto.getBoard())
                         .build());
-
-
         return CommentDto.CommentSaveResponseDto.builder().id(comment.getComId())
-                .writer(comment.getComWriter()).build();
+                .writer(comment.getComWriter())
+                .articleid(id)
+                .build();
 
 
     }

@@ -30,7 +30,7 @@ public class CommentController {
 
         CommentDto.CommentSaveResponseDto comment = commentService.commentSave(id, commentSaveRequestDto);
 
-        return ResponseEntity.ok().body(Response.success(new CommentDto.CommentSaveResponseDto(comment.getId(), comment.getWriter())));
+        return ResponseEntity.ok().body(Response.success(new CommentDto.CommentSaveResponseDto(comment.getId(), comment.getWriter(),comment.getArticleid())));
 
     }
 

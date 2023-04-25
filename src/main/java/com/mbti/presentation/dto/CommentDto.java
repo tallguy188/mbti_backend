@@ -5,6 +5,8 @@ import com.mbti.domain.entity.Board;
 import com.mbti.domain.entity.User;
 import lombok.*;
 
+import java.util.Optional;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,25 +15,28 @@ public class CommentDto {
 
 
     @Getter
+    @Setter
     @AllArgsConstructor
     @Builder
+
     public static class CommentSaveRequestDto {
 
 
         private String content;
         private String regdate;
         private String writer;
-        private User user;
+        private Optional<User> user;
         private Board board;
     }
 
     @Getter
+    @Setter
     @AllArgsConstructor
     @Builder
     public static class CommentSaveResponseDto{
         private Integer id;
         private String writer;
-        private String articleid;  // 댓글이 저장된 게시물의 id를 넘겨줌
+        private Integer articleid;  // 댓글이 저장된 게시물의 id를 넘겨줌
     }
 
 }

@@ -29,18 +29,14 @@ public class Comment {
     private String comWriter;
 
     @Builder
-    public Comment(Integer comId, String comContent, String comRegdate, String comWriter){
+    public Comment(Integer comId, String comContent, String comRegdate, String comWriter, Board board){
 
         this.comId = comId;
         this.comContent = comContent;
         this.comRegdate = comRegdate;
         this.comWriter = comWriter;
-
+        this.board = board;
     }
-
-
-
-
 
     @ManyToOne
     @JoinColumn(name="user_id")

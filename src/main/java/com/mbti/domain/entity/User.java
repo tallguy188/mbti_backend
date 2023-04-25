@@ -28,7 +28,7 @@ public class User  {
     @Column(name="user_pw", nullable = false)
     private String userPw;
 
-    @Column(name="nick",unique = true ,nullable=false)
+    @Column(name="nick",unique = true)
     private String userNick;
 
     @Column(name="user_mbti")
