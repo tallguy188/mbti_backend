@@ -43,8 +43,11 @@ public class CommentDto {
     @Getter
     @AllArgsConstructor
     @Builder
-    public static class CommentDeleteResponseDto{
-        private Integer commentid;
+    public static class CommentDetialResponseDto {
+        private Integer id;
+        private String content;
+        private String regdate;
+        private String writer;
     }
 
 }

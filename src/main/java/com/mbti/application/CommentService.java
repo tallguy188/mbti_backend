@@ -12,7 +12,9 @@ import com.mbti.presentation.dto.CommentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -54,6 +56,16 @@ public class CommentService {
         commentRepository.deleteById(commentId);
 
         return ;
+    }
+
+    public List<CommentDto.CommentDetialResponseDto>commentSearchAll(Integer articleid) {
+
+        List<Comment> findallcomment  = commentRepository.findCommentsByBoard_ArticleId(articleid);
+
+        List<CommentDto.CommentDetialResponseDto> commentlist = findallcomment.stream()
+                .map(m-> new CommentDto.CommentDetialResponseDto(m.getComId(),m.getComRegdate(),m.getComContent(),m.getComWriter()))
+                .collect(Collectors.toList());
+        return commentlist;
 
     }
 
