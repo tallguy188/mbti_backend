@@ -39,4 +39,12 @@ public class CommentDto {
         private Integer articleid;  // 댓글이 저장된 게시물의 id를 넘겨줌
     }
 
+
+    @Getter
+    @AllArgsConstructor
+    @Builder
+    public static class CommentDeleteResponseDto{
+        private Integer commentid;
+    }
+
 }

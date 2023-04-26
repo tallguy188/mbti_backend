@@ -1,9 +1,7 @@
 package com.mbti.domain.entity;
 
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +10,8 @@ import java.util.Date;
 @Entity
 @Table(name="tb_comment")
 @NoArgsConstructor
+@Getter
+@Setter
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

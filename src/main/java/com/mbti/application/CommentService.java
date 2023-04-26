@@ -1,6 +1,7 @@
 package com.mbti.application;
 
 
+import com.mbti.common.exception.ResourceNotFoundException;
 import com.mbti.domain.entity.Board;
 import com.mbti.domain.entity.Comment;
 import com.mbti.domain.entity.User;
@@ -29,8 +30,6 @@ public class CommentService {
         Optional<User> user = userRepository.findByUserNick(commentSaveRequestDto.getWriter());
         Board board = boardRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
 
-
-
         commentSaveRequestDto.setUser(user);
         commentSaveRequestDto.setBoard(board);
 
@@ -46,7 +45,17 @@ public class CommentService {
                 .articleid(id)
                 .build();
 
+    }
+    public void commentDelete(Integer id, Integer commentId){
+
+
+        Comment comment =commentRepository.findById(commentId).orElseThrow(()-> new ResourceNotFoundException("Comment","id",commentId));
+
+        commentRepository.deleteById(commentId);
+
+        return ;
 
     }
+
 
 }

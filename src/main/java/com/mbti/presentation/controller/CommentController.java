@@ -8,11 +8,9 @@ import com.mbti.presentation.dto.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,12 +25,23 @@ public class CommentController {
     @PostMapping("/board/{id}/boardcomment")
     public ResponseEntity<Response<CommentDto.CommentSaveResponseDto>>commentSave(@PathVariable Integer id, @RequestBody CommentDto.CommentSaveRequestDto commentSaveRequestDto) {
 
-
         CommentDto.CommentSaveResponseDto comment = commentService.commentSave(id, commentSaveRequestDto);
 
         return ResponseEntity.ok().body(Response.success(new CommentDto.CommentSaveResponseDto(comment.getId(), comment.getWriter(),comment.getArticleid())));
 
     }
+
+    @Operation(summary = "댓글 삭제 메소드", description = "댓글 삭제 메소드입니다.")
+    @DeleteMapping("/board/{id}/boardcomment/{commentid}")   // 여기서 id는 article_id, commentid는 댓글 id
+    public ResponseEntity<Response>commentDelete(@PathVariable Integer id,@PathVariable Integer commentid){
+
+
+        commentService.commentDelete(id,commentid);
+
+        return ResponseEntity.ok().body(Response.success(HttpStatus.OK));
+    }
+
+
 
 
 

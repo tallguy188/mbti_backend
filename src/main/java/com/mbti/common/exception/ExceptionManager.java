@@ -10,7 +10,7 @@ import com.mbti.presentation.dto.Response;
 public class ExceptionManager {
 
     @ExceptionHandler(UserJoinLoginException.class)
-    public ResponseEntity<?>userJoinLoginExeptionHandler(UserJoinLoginException e) {
+    public ResponseEntity<?>userJoinLoginExceptionHandler(UserJoinLoginException e) {
         return ResponseEntity.status(e.getErrorCode().getHttpStatus()).body(Response.error(e.getErrorCode().name()));
 
     }
