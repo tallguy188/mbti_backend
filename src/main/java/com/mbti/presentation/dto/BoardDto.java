@@ -38,6 +38,24 @@ public class BoardDto {
         private String date;
         private String mbti;
         private String writer;  //nick값을 넣어주면 될듯
-
     }
+
+    @Getter
+    @AllArgsConstructor
+    @Builder
+    public static class boardUpdateResponseDto {
+        private String title;
+        private String content;
+        private String regdate;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    @Builder
+    public static class boardUpdateRequestDto {
+        private String title;
+        private String content;
+        private String regdate;
+    }
+
 }

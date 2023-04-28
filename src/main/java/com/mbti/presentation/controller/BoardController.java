@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor  // 필드생성자자동주입
+@Tag(name="게시글관리",description = "게시글 관리 api입니다.")
 public class BoardController {
 
     private final BoardService boardService;
@@ -40,6 +41,15 @@ public class BoardController {
     public List<BoardDto.boardDetailResponseDto> boardSearchAll() {
 
         return boardService.boardSearchAll();
+    }
+
+    @Operation(summary = "게시물 수정 메소드", description = "게시물 수정 메소드입니다.")
+    @PutMapping("/board/{id}")
+    public ResponseEntity<Response<BoardDto.boardUpdateResponseDto>>boardUpdate(@PathVariable Integer id,@RequestBody BoardDto.boardUpdateRequestDto boardUpdateRequestDto) {
+
+        BoardDto.boardUpdateResponseDto board = boardService.boardUpdate(id,boardUpdateRequestDto);
+        return ResponseEntity.ok().body(Response.success(new BoardDto.boardUpdateResponseDto(board.getTitle(), board.getContent(), board.getRegdate())));
+
     }
 
 }

@@ -63,7 +63,7 @@ public class CommentService {
         List<Comment> findallcomment  = commentRepository.findCommentsByBoard_ArticleId(articleid);
 
         List<CommentDto.CommentDetialResponseDto> commentlist = findallcomment.stream()
-                .map(m-> new CommentDto.CommentDetialResponseDto(m.getComId(),m.getComRegdate(),m.getComContent(),m.getComWriter()))
+                .map(m-> new CommentDto.CommentDetialResponseDto(m.getComId(),m.getComContent(),m.getComRegdate(),m.getComWriter()))
                 .collect(Collectors.toList());
         return commentlist;
 
