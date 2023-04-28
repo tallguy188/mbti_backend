@@ -19,7 +19,7 @@ public class CommentDto {
     @AllArgsConstructor
     @Builder
 
-    public static class CommentSaveRequestDto {
+    public static class commentSaveRequestDto {
 
 
         private String content;
@@ -33,8 +33,8 @@ public class CommentDto {
     @Setter
     @AllArgsConstructor
     @Builder
-    public static class CommentSaveResponseDto{
-        private Integer id;
+    public static class commentSaveResponseDto{
+        private Integer id;     //commentid
         private String writer;
         private Integer articleid;  // 댓글이 저장된 게시물의 id를 넘겨줌
     }
@@ -43,11 +43,29 @@ public class CommentDto {
     @Getter
     @AllArgsConstructor
     @Builder
-    public static class CommentDetialResponseDto {
+    public static class commentDetailResponseDto {
         private Integer id;
         private String content;
         private String regdate;
         private String writer;
     }
+
+
+    @Getter
+    @AllArgsConstructor
+    @Builder
+    public static class commentUpdateRequestDto{
+        private String content;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    @Builder
+    public static class commentUpdateResponseDto{
+        private Integer commentid;
+        private String content;
+    }
+
+
 
 }
