@@ -2,10 +2,14 @@ package com.mbti.presentation.dto;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @Getter
+@Builder
+@ToString
 
 //모든 response는 현재 response 객체로 감싸서 return
 //제너릭생성시 t는 객체 생성시 해당 타입으로 변경됨.

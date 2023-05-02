@@ -1,10 +1,9 @@
 package com.mbti.presentation.controller;
 
 
-import com.mbti.application.BoardService;
+
 import com.mbti.application.CommentService;
-import com.mbti.domain.entity.Board;
-import com.mbti.domain.entity.Comment;
+
 import com.mbti.presentation.dto.CommentDto;
 import com.mbti.presentation.dto.Response;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.ResourceBundle;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -23,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class CommentController {
 
-    private final BoardService boardService;
+
     private final CommentService commentService;
 
     @Operation(summary = "댓글 저장 메소드", description = "댓글 저장 메소드입니다.")
@@ -38,7 +37,7 @@ public class CommentController {
 
     @Operation(summary = "댓글 삭제 메소드", description = "댓글 삭제 메소드입니다.")
     @DeleteMapping("/board/{id}/boardcomment/{commentid}")   // 여기서 id는 article_id, commentid는 댓글 id
-    public ResponseEntity<Response> commentDelete(@PathVariable Integer id, @PathVariable Integer commentid) {
+    public ResponseEntity<Response<HttpStatus>> commentDelete(@PathVariable Integer id, @PathVariable Integer commentid) {
 
         commentService.commentDelete(id, commentid);
 

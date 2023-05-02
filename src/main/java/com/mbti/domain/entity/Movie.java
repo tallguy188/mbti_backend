@@ -13,7 +13,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="movie_id", nullable = false)
-    private Integer movieId;
+    private Integer movieapiId;
 
     @Column(name="movie_url")
     private String movieUrl;

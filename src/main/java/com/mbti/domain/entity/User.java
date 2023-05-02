@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.MissingRequestCookieException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -34,7 +35,8 @@ public class User  {
     @Column(name="user_mbti")
     private String userMbti;
 
-
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    private List<Mcomment> mcomments;
 
 
     @Builder

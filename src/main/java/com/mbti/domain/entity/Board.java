@@ -42,7 +42,7 @@ public class Board {
     @JoinColumn(name="user_id")
     private User user;
 
-    @OneToMany(mappedBy = "board",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "board",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
     @Builder

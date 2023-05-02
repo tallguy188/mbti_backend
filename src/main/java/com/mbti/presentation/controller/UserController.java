@@ -2,7 +2,7 @@
 package com.mbti.presentation.controller;
 
 import com.mbti.application.UserService;
-import com.mbti.domain.entity.User;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

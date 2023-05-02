@@ -31,7 +31,8 @@ public class BoardController {
 
     @Operation(summary = "게시글 삭제 메소드", description = "게시글 삭제 메소드입니다.")
     @DeleteMapping("/board/{id}")
-    public ResponseEntity<Response>boardDelete(@PathVariable Integer id) {
+    public ResponseEntity<Response<HttpStatus>>boardDelete(@PathVariable Integer id) {
+
         boardService.boardDelete(id);
         return ResponseEntity.ok().body(Response.success(HttpStatus.OK));
     }
