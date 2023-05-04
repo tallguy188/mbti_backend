@@ -34,7 +34,9 @@ public class McommentController {
     @DeleteMapping("/movierecommendation/{movieapiId}/moviecomment/{mcommentid}")
     public ResponseEntity<Response<HttpStatus>>mcommentDelete(@PathVariable Integer movieapiId, @PathVariable Integer mcommentid) {
 
-       mcommentService.mcommentDelete();
+       mcommentService.mcommentDelete(movieapiId, mcommentid);
+
+       return ResponseEntity.ok().body(Response.success(HttpStatus.OK));
     }
 
 

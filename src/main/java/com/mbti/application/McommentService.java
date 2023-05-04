@@ -21,15 +21,19 @@ public class McommentService {
     public void mcommentSave(Integer movieapiId, McommentDto.requestDto requestDto) {
 
         User comuser = userRepository.findByUserNick(requestDto.getWriter()).orElseThrow(()-> new IllegalArgumentException("해당 페이지 이용이 제한됩니다."));
-
-
         Mcomment mcomment = mcommentRepository.save(
                 Mcomment.builder()
                         .mcomContent(requestDto.getMcommentContent())
                         .user(comuser)
                         .movieapiId(movieapiId)
                         .build());
+        return ;
+    }
 
+    public void mcommentDelete(Integer movieapiId, Integer mcommentid) {
+
+        Mcomment mcomment  = mcommentRepository.findById(mcommentid).orElseThrow(()->new IllegalArgumentException("해당 댓글 삭제가 불가능합니다."));
+        mcommentRepository.deleteById(mcommentid);
         return ;
     }
 
