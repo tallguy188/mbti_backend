@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface McommentRepository extends JpaRepository<Mcomment,Integer> {
 
+    List<Mcomment>findMcommentByMovieapiId(Integer movidApi);
+
 }

@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "영화추천댓글관리", description = "영화추천 댓글 관리 api입니다.")
@@ -37,6 +39,12 @@ public class McommentController {
        mcommentService.mcommentDelete(movieapiId, mcommentid);
 
        return ResponseEntity.ok().body(Response.success(HttpStatus.OK));
+    }
+
+    @Operation(summary = "영화추천 댓글 전체조회", description = "영화 추천 댓글 전체조회 메소드입니다.")
+    @GetMapping("/movierecommendation/{movieapiId}/moviecomment")
+    public List<McommentDto.mcommentDetailResponseDto>mcommentSearchAll(@PathVariable Integer movieapiId) {
+        return mcommentService.mcommentSearchAll(movieapiId);
     }
 
 

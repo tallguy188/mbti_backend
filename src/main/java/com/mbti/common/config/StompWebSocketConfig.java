@@ -17,8 +17,6 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/chatting")
                 .setAllowedOrigins("http://localhost:9991")
                 .withSockJS(); //핸드셰이크 경로 생성
-
-
     }
 
     @Override

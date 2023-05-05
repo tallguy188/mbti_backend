@@ -22,7 +22,14 @@ public class McommentDto {
 
     }
 
+    @Getter
+    @AllArgsConstructor
+    @Builder
+    public static class mcommentDetailResponseDto{
 
-
+        private Integer commenId;
+        private String writer;
+        private String mcommentContent;
+    }
 
 }
