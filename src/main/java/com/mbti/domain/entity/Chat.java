@@ -1,10 +1,7 @@
 package com.mbti.domain.entity;
 
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,8 +11,9 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name="tb_chat")
-
+@Builder
 public class Chat {
 
     @Id

@@ -2,6 +2,7 @@ package com.mbti.application;
 import com.mbti.common.config.EncrypterConfig;
 import com.mbti.common.exception.UserJoinLoginException;
 import com.mbti.common.exception.ErrorCode;
+import com.mbti.common.exception.UserNotFoundException;
 import com.mbti.common.util.JwtTokenUtil;
 import com.mbti.domain.entity.User;
 import com.mbti.domain.repository.UserRepository;
@@ -75,7 +76,11 @@ public class UserService {
                 .mbti(user.getUserMbti()).build();
     }
 
-
+    // 사용자 id로 사용자 찾기
+    public User getUserById(Integer id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+    }
 
 
 }
