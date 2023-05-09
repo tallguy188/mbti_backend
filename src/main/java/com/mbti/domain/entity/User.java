@@ -47,6 +47,4 @@ public class User  {
         this.userNick = userNick;
         this.userMbti = userMbti;
     }
-
-
 }

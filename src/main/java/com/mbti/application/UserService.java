@@ -29,8 +29,6 @@ public class UserService {
     private String secretKey;  // yml에서 설정한 token의 키값 설정
     private long expireTimeMs = 1000*60*60; // 1시간
 
-
-
     // 회원가입
     public UserDto.RegisterResponseDto register(UserDto.UserRequestDto userRequestDto) {
 
@@ -53,8 +51,6 @@ public class UserService {
                 .mbti(user.getUserMbti())
                 .build();
     }
-
-
     // 로그인
     public UserDto.UserLoginResponse login(UserDto.UserRequestDto userRequestDto) throws UsernameNotFoundException {
 
@@ -81,6 +77,4 @@ public class UserService {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
     }
-
-
 }

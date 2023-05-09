@@ -14,6 +14,8 @@ spring:
     url: jdbc:mariadb://localhost:3306/Board
     username: min
     password: p123456
+    mvc:
+      static-path-pattern: /**
 
   jpa:
     database: mysql
