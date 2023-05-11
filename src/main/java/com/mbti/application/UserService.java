@@ -25,6 +25,8 @@ public class UserService {
 
     private final BCryptPasswordEncoder encoder;
 
+    private final JwtTokenUtil jwtTokenUtil;
+
     @Value("${jwt.token.secret}")
     private String secretKey;  // yml에서 설정한 token의 키값 설정
     private long expireTimeMs = 1000*60*60; // 1시간
@@ -77,4 +79,5 @@ public class UserService {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
     }
+
 }

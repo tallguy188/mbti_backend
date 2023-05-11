@@ -13,14 +13,17 @@ import java.util.List;
 public class ChatService {
     private final ChatRepository chatRepository;
 
+
+    // chat repo에 chat 저장
     public void saveChat(Chat chat) {
         chatRepository.save(chat);
     }
 
+
+
+    // chatuser 가져오기
     public List<User> getChatUser(Integer chatId) {
-
         return chatRepository.getChatByChatUser(chatId);
-
     }
 
 

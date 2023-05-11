@@ -27,4 +27,9 @@ public class Chat {
             joinColumns = @JoinColumn(name = "chat_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> chatUser;   // 채팅방 참가자 목록
+
+
+    @OneToMany(mappedBy = "chat",cascade = CascadeType.ALL)
+    private List<Message> messages;
+
 }

@@ -8,21 +8,20 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
 @Setter
+@Getter
 @Data
 @Entity
 @NoArgsConstructor
 @Table(name="tb_message")
 
-public class Message {
+public class Message {   // 별도로 메시지를 저장하거나 삭제하지 않으니까 id가 필요없다.
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name="message_id", nullable = false)   //메시지 id
-    private Integer messageId;
-
+    @Column(name="id", nullable = false)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id")
@@ -31,5 +30,9 @@ public class Message {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="receiver_id")
     private User receiver;   // 수신자
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="chat_id")
+    private Chat chat;
 
 }
