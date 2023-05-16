@@ -45,5 +45,12 @@ public class UserDto {
         private String mbti;
     }
 
+    @AllArgsConstructor
+    @Getter
+    @Builder
+    public static class UserRefreshResponse {   // 리프레쉬 토큰
+        private String refreshToken;
+    }
+
 
 }

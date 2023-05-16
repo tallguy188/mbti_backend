@@ -4,9 +4,12 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+
+@Component
 public class JwtTokenUtil {   // 토큰 생성 공간
 
     public static String createToken(String username, long expireTimeMs, String key) {

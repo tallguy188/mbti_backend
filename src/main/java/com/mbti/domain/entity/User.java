@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-
-
 @Data
 @Entity
 @NoArgsConstructor
@@ -35,9 +33,11 @@ public class User  {
     @Column(name="user_mbti")
     private String userMbti;
 
+    @Column(name = "is_logged_in")
+    private boolean isLoggedIn;
+
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<Mcomment> mcomments;
-
 
     @Builder
     public User(Integer userId,String userPw, String userNick, String userMbti) {

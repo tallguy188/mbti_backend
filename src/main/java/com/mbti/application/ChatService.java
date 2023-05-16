@@ -19,8 +19,6 @@ public class ChatService {
         chatRepository.save(chat);
     }
 
-
-
     // chatuser 가져오기
     public List<User> getChatUser(Integer chatId) {
         return chatRepository.getChatByChatUser(chatId);
@@ -28,6 +26,5 @@ public class ChatService {
 
 
 
-    //savechat    채팅 저장(내용은 저장 x)
-    //getuserchat  저장한 채팅 이용자를 채팅 Id를 통해서 가져옴.
+
 }
