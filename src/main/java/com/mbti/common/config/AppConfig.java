@@ -21,7 +21,9 @@ public class AppConfig implements WebMvcConfigurer {
         registry.addInterceptor(tokenInterceptor)
                 .excludePathPatterns("/")
                 .excludePathPatterns("/login")
-                .excludePathPatterns("/register");
+                .excludePathPatterns("/register")
+                .excludePathPatterns("/swagger-ui/**"); // Swagger UI 경로 제외
+
 
 
     }

@@ -24,6 +24,11 @@ public class TokenInterceptor implements HandlerInterceptor {
         // 헤더에서 토큰 추출
         String token = request.getHeader("Authorization");
 
+        if(isSwaggerRequest(request)) {
+
+            return true;
+        }
+
         // 토큰 유효성 검사
         if (token == null || !token.startsWith("Bearer")) {
 
@@ -44,6 +49,13 @@ public class TokenInterceptor implements HandlerInterceptor {
             return false;
 
         }
+    }
+
+    private boolean isSwaggerRequest(HttpServletRequest request) {
+        String uri = request.getRequestURI();
+
+        return uri.contains("swagger") || uri.contains("api-docs") || uri.contains("webjars");
+
     }
 
 }
