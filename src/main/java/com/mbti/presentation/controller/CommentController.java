@@ -17,6 +17,7 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 @Tag(name = "게시글댓글관리", description = "게시글 댓글 관리 api입니다.")
 
