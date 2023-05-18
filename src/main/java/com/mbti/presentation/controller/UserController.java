@@ -6,6 +6,7 @@ import com.mbti.application.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,4 +39,7 @@ public class UserController {
        UserDto.UserLoginResponse user = userService.login(userRequestDto);
         return ResponseEntity.ok().body(Response.success(new UserDto.UserLoginResponse(user.getToken(), user.getMbti())));
     }
+
+//    @Operation(summary = "로그아웃 메소드",description = "로그아웃 메소드입니다.")
+//    public ResponseEntity<Response<HttpStatus>> logout()
 }

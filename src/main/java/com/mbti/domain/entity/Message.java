@@ -33,6 +33,6 @@ public class Message {   // 별도로 메시지를 저장하거나 삭제하지 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="chat_id")
-    private Chat chat;
+    private Chatroom chatroom;
 
 }

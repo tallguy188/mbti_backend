@@ -1,6 +1,6 @@
 package com.mbti.application;
 
-import com.mbti.domain.entity.Chat;
+import com.mbti.domain.entity.Chatroom;
 import com.mbti.domain.entity.User;
 import com.mbti.domain.repository.ChatRepository;
 import lombok.AllArgsConstructor;
@@ -15,8 +15,8 @@ public class ChatService {
 
 
     // chat repo에 chat 저장
-    public void saveChat(Chat chat) {
-        chatRepository.save(chat);
+    public void saveChat(Chatroom chatroom) {
+        chatRepository.save(chatroom);
     }
 
     // chatuser 가져오기

@@ -64,7 +64,7 @@ public class UserService {
         if(!encoder.matches(userRequestDto.getPw(),user.getUserPw())) {
             throw new UserJoinLoginException(ErrorCode.INVALID_PASSWORD,String.format("비밀번호가 일치하지 않습니다"));
         }
-
+        // 로그인되면 true
         user.setLoggedIn(true);
         String usertoken =JwtTokenUtil.createToken(user.getUserNick(),expireTimeMs,secretKey);
         // 두가지 모두 통과하면 토큰 발행
@@ -77,9 +77,4 @@ public class UserService {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
     }
-
-    // 로그인되어있는 사용자 가져오기/ 따로 리프레쉬 토큰이 필요하지 않는다.
-
-
-
 }

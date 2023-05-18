@@ -3,7 +3,7 @@ package com.mbti.presentation.controller;
 
 import com.mbti.application.ChatService;
 import com.mbti.application.UserService;
-import com.mbti.domain.entity.Chat;
+import com.mbti.domain.entity.Chatroom;
 import com.mbti.domain.entity.User;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -46,12 +46,12 @@ public class WebSocketHandler extends TextWebSocketHandler {
              List<Integer> userIds = (List<Integer>) session.getAttributes().get("userIds");
 
              // chat 텐티티 생성, 저장
-             Chat chat = Chat.builder()
+             Chatroom chatroom = Chatroom.builder()
                      .chatId(chatId)
                      .chatUser(userIds.stream().map(id->userService.getUserById(id)).collect(Collectors.toList()))
                      .build();
 
-             chatService.saveChat(chat);  // 채팅저장(내용은 저장x)
+             chatService.saveChat(chatroom);  // 채팅저장(내용은 저장x)
 
              // 해당 채팅방에 websocketsession추가
              chatList.computeIfAbsent(chatId, k-> new ArrayList<>()).add(session);
@@ -65,8 +65,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
         // 클라이언트에서 메시지를 보내면 호출됨 
-        String chatRommId = (String) session.getAttributes().get("chatRoomId");
-        List<WebSocketSession> sessions = chatList.get(chatRommId);
+        String chatRoomId = (String) session.getAttributes().get("chatRoomId");
+        List<WebSocketSession> sessions = chatList.get(chatRoomId);
 
         // sessions리스트 안의 웹소켓 세션들을 순회
         for(WebSocketSession webSocketSession : sessions) {

@@ -12,9 +12,9 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="tb_chat")
+@Table(name="tb_chatroom")
 @Builder
-public class Chat {
+public class Chatroom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

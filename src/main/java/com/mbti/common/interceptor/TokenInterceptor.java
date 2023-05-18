@@ -16,7 +16,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     private String secretKey;
 
     public TokenInterceptor(Environment environment) {
-        this.secretKey = environment.getProperty("jwt.secret");
+        this.secretKey = environment.getProperty("jwt.token.secret");
     }
 
     @Override
