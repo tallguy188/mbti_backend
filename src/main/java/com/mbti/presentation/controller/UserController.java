@@ -18,7 +18,7 @@ import com.mbti.presentation.dto.UserDto;
 @Tag(name="회원관리", description = "회원관련 api입니다.")
 @RequiredArgsConstructor   // 필드자동생성자주입
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;

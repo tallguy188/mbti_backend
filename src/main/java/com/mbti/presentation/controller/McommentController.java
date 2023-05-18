@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @Tag(name = "영화추천댓글관리", description = "영화추천 댓글 관리 api입니다.")
 public class McommentController {
