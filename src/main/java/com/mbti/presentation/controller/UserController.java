@@ -40,6 +40,4 @@ public class UserController {
         return ResponseEntity.ok().body(Response.success(new UserDto.UserLoginResponse(user.getToken(), user.getMbti())));
     }
 
-//    @Operation(summary = "로그아웃 메소드",description = "로그아웃 메소드입니다.")
-//    public ResponseEntity<Response<HttpStatus>> logout()
 }
