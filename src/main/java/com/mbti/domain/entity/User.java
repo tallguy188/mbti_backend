@@ -16,7 +16,8 @@ import java.util.stream.Collectors;
 @Entity
 @NoArgsConstructor
 @Table(name="tb_user")
-
+@Getter
+@Setter
 public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

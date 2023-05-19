@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +17,6 @@ import com.mbti.presentation.dto.UserDto;
 @Tag(name="회원관리", description = "회원관련 api입니다.")
 @RequiredArgsConstructor   // 필드자동생성자주입
 @RestController
-@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;
@@ -35,9 +33,18 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Response<UserDto.UserLoginResponse>> login(@RequestBody UserDto.UserRequestDto userRequestDto) {
 
-
        UserDto.UserLoginResponse user = userService.login(userRequestDto);
         return ResponseEntity.ok().body(Response.success(new UserDto.UserLoginResponse(user.getToken(), user.getMbti())));
+    }
+
+    @Operation(summary = "로그아웃 메소드",description = "로그아웃 메소드입니다.")
+    @PostMapping("/logout")
+    public ResponseEntity<Response<HttpStatus>> logout(@RequestBody UserDto.UserLogoutRequest userLogoutRequest) {
+        System.out.println("Logout method called");
+        userService.logout(userLogoutRequest);
+
+
+        return ResponseEntity.ok().body(Response.success(HttpStatus.OK));
     }
 
 }

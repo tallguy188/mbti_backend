@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 public class TokenInterceptor implements HandlerInterceptor {
 
+
     private String secretKey;
 
     public TokenInterceptor(Environment environment) {
@@ -22,12 +23,22 @@ public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,Object handler)throws Exception {
         // 헤더에서 토큰 추출
+
+
         String token = request.getHeader("Authorization");
+
+        String requestURI = request.getRequestURI();
+        if ("/logout".equals(requestURI)) {
+            System.out.println("Request URI: " + requestURI);
+            return true;
+        }
 
         if(isSwaggerRequest(request)) {
 
             return true;
         }
+
+
 
         // 토큰 유효성 검사
         if (token == null || !token.startsWith("Bearer")) {

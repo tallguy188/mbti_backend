@@ -21,13 +21,14 @@ public class AppConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/")
                 .excludePathPatterns("/login")
                 .excludePathPatterns("/register")
+                .excludePathPatterns("/logout")
                 .excludePathPatterns("/swagger-ui/**"); // Swagger UI 경로 제외
     }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOrigins("http://localhost:3000")
                 .allowedMethods("GET","POST","PUT","DELETE")
                 .allowedHeaders("Authorization")  //Authorization
                 .allowCredentials(true);

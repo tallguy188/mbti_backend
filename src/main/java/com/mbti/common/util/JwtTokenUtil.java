@@ -26,15 +26,14 @@ public class JwtTokenUtil {   // 토큰 생성 공간
 
     }
     // 토큰 검증 메소드
-    public static Claims validateToken(String token, String key)throws JwtException {
+    public static Claims validateToken(String token, String key) throws JwtException {
         try {
             // 파싱된 토큰에서 클레임 추출
-            return Jwts.parser().setSigningKey(key).parseClaimsJwt(token).getBody();
+            return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
             // 토큰이 만료되었거나 유효하지 않으면 예외처리
         }catch(JwtException | IllegalArgumentException e){   // JwtException 혹은 IllegalArgumentException이 발생했을 떄
             throw new JwtException("만료되거나 유요하지 않은 토큰입니다.");
         }
-
     }
 
 }

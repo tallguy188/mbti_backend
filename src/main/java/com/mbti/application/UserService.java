@@ -61,18 +61,33 @@ public class UserService {
 
                 .orElseThrow(()-> new UserJoinLoginException(ErrorCode.NOT_FOUND,String.format("가입된적 없습니다.")));
         // 패스워드 일치 확인
-        if(!encoder.matches(userRequestDto.getPw(),user.getUserPw())) {
+
+        String rawPassword = userRequestDto.getPw();
+        if(rawPassword == null || rawPassword.isEmpty()) {
+            throw new IllegalArgumentException("비밀번호를 입력해주세요.");
+        }
+        if(!encoder.matches(rawPassword,user.getUserPw())) {
             throw new UserJoinLoginException(ErrorCode.INVALID_PASSWORD,String.format("비밀번호가 일치하지 않습니다"));
         }
         // 로그인되면 true
         user.setLoggedIn(true);
+        userRepository.save(user);
+
         String usertoken =JwtTokenUtil.createToken(user.getUserNick(),expireTimeMs,secretKey);
         // 두가지 모두 통과하면 토큰 발행
         return UserDto.UserLoginResponse.builder().token(usertoken)
                 .mbti(user.getUserMbti()).build();
     }
 
+    // 로그아웃
+    public void logout(UserDto.UserLogoutRequest userLogoutRequest) {
+        User user = userRepository.
+                findByUserNick(userLogoutRequest.getNick()).orElseThrow(() -> new UserNotFoundException("user not found"));
+        user.setLoggedIn(false);
+        userRepository.save(user);
+    }
     // 사용자 id로 사용자 찾기
+
     public User getUserById(Integer id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));

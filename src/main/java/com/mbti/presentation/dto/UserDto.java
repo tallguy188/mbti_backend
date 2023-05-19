@@ -48,8 +48,9 @@ public class UserDto {
     @AllArgsConstructor
     @Getter
     @Builder
-    public static class UserRefreshResponse {   // 리프레쉬 토큰
-        private String refreshToken;
+    public static class UserLogoutRequest {
+        private String token;
+        private String nick;
     }
 
 
