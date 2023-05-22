@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import com.mbti.presentation.dto.UserDto;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -72,7 +74,7 @@ public class UserService {
             throw new UserJoinLoginException(ErrorCode.INVALID_PASSWORD,String.format("비밀번호가 일치하지 않습니다"));
         }
         // 로그인되면 true
-        user.setIsLoggedIn(1);
+        user.setLoggedIn(true);
         userRepository.save(user);
 
         String usertoken =JwtTokenUtil.createToken(user.getUserNick(),expireTimeMs,secretKey);
@@ -81,18 +83,37 @@ public class UserService {
                 .mbti(user.getUserMbti()).build();
     }
 
-    // 로그아웃
-    //@Transactional
+     // 로그아웃
+    @Transactional
     public void refresh(UserDto.UserLogoutRequest request) {
+        String nick = request.getNick();    //getnick이 null을 불러온다.
+        System.out.println(nick);
         User user = userRepository.
                 findByUserNick(request.getNick()).orElseThrow(() -> new UserNotFoundException("user not found"));
-        user.setIsLoggedIn(0);
+        user.setLoggedIn(false);
         userRepository.save(user);
     }
+
+
     // 사용자 id로 사용자 찾기
 
     public User getUserById(Integer id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+    }
+
+    // 로그인한 사용자 리스트 반환
+    public List<UserDto.UserLoginListResponse> loginSearchAll() {
+
+
+        List<User> findalluser = userRepository.findByIsLoggedInIsTrue();
+
+        List<UserDto.UserLoginListResponse> userlist = findalluser.stream()
+                .map(m-> new UserDto.UserLoginListResponse(m.getUserNick(),m.getUserMbti()))
+                .collect(Collectors.toList());
+
+        return userlist;
+
+
     }
 }

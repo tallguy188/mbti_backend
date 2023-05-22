@@ -1,6 +1,7 @@
 package com.mbti.presentation.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @Getter
@@ -52,6 +53,16 @@ public class UserDto {
     @Builder
     public static class UserLogoutRequest {
         private String nick;
+    }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter
+    @Builder
+    public static class UserLoginListResponse {
+        private String nick;
+        private String mbti;
+
     }
 
 

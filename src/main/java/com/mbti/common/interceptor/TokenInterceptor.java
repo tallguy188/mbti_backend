@@ -29,10 +29,7 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         String requestURI = request.getRequestURI();
         System.out.println("Request URI: " + requestURI);
-//        if ("/logout".equals(requestURI)) {
-//            System.out.println("Request URI: " + requestURI);
-//            return true;
-//        }
+
         if(isSwaggerRequest(request)) {
 
             return true;
