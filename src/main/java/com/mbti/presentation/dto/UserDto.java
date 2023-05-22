@@ -38,6 +38,7 @@ public class UserDto {
     }
 
     @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     @Builder
     public static class UserLoginResponse {   //토큰의 인코딩 값을 반환
@@ -46,10 +47,10 @@ public class UserDto {
     }
 
     @AllArgsConstructor
+    @NoArgsConstructor
     @Getter
     @Builder
     public static class UserLogoutRequest {
-        private String token;
         private String nick;
     }
 

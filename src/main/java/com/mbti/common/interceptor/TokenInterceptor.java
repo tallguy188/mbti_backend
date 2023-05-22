@@ -28,17 +28,15 @@ public class TokenInterceptor implements HandlerInterceptor {
         String token = request.getHeader("Authorization");
 
         String requestURI = request.getRequestURI();
-        if ("/logout".equals(requestURI)) {
-            System.out.println("Request URI: " + requestURI);
-            return true;
-        }
-
+        System.out.println("Request URI: " + requestURI);
+//        if ("/logout".equals(requestURI)) {
+//            System.out.println("Request URI: " + requestURI);
+//            return true;
+//        }
         if(isSwaggerRequest(request)) {
 
             return true;
         }
-
-
 
         // 토큰 유효성 검사
         if (token == null || !token.startsWith("Bearer")) {

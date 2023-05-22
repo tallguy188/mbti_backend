@@ -15,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.mbti.presentation.dto.UserDto;
 
+import javax.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -70,7 +72,7 @@ public class UserService {
             throw new UserJoinLoginException(ErrorCode.INVALID_PASSWORD,String.format("비밀번호가 일치하지 않습니다"));
         }
         // 로그인되면 true
-        user.setLoggedIn(true);
+        user.setIsLoggedIn(1);
         userRepository.save(user);
 
         String usertoken =JwtTokenUtil.createToken(user.getUserNick(),expireTimeMs,secretKey);
@@ -80,10 +82,11 @@ public class UserService {
     }
 
     // 로그아웃
-    public void logout(UserDto.UserLogoutRequest userLogoutRequest) {
+    //@Transactional
+    public void refresh(UserDto.UserLogoutRequest request) {
         User user = userRepository.
-                findByUserNick(userLogoutRequest.getNick()).orElseThrow(() -> new UserNotFoundException("user not found"));
-        user.setLoggedIn(false);
+                findByUserNick(request.getNick()).orElseThrow(() -> new UserNotFoundException("user not found"));
+        user.setIsLoggedIn(0);
         userRepository.save(user);
     }
     // 사용자 id로 사용자 찾기

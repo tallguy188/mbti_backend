@@ -35,7 +35,7 @@ public class User  {
     private String userMbti;
 
     @Column(name = "is_logged_in")
-    private boolean isLoggedIn;
+    private Integer isLoggedIn;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<Mcomment> mcomments;

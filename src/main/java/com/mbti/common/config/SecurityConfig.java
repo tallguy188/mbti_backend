@@ -1,26 +1,21 @@
 package com.mbti.common.config;
 
-import com.mbti.application.UserService;
-//import com.mbti.jwt.JwtAuthenticationFilter;
-//import com.mbti.jwt.JwtTokenProvider;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
+public class SecurityConfig {
 
-public class SecurityConfig{
+
 
 
     @Bean
@@ -31,9 +26,11 @@ public class SecurityConfig{
                 .cors()   // 다른 도메인의 리소스에 대해 접근이 허용되는지 체크
                 .and()  // 묶음 구분(httpBasic(),crsf,cors가 한묶음)
                 .authorizeRequests()  //각 경로 path별 권한 처리
-                .antMatchers("/join/**").permitAll()
+                .antMatchers("/register/**").permitAll()
                 .antMatchers("/login/**").permitAll()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/min").permitAll()
+                .antMatchers("/").permitAll()
+                // .antMatchers("/**").permitAll()
                 .and()
                 .sessionManagement()  //세션 관리 기능
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //jwt사용하는 경우 씀(STATELESS는 인증 정보를 서버에 담지 않는다.)
@@ -41,6 +38,30 @@ public class SecurityConfig{
                 .and()
                 .build();
     }
+
+
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .httpBasic().disable()
+//                .csrf().disable()
+//                .cors()
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/register/**").permitAll()
+//                .antMatchers("/login/**").permitAll()
+//                .antMatchers("/**").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/")
+//                .invalidateHttpSession(true);
+//    }
 
 
 }
