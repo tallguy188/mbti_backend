@@ -111,9 +111,13 @@ public class UserService {
         List<UserDto.UserLoginListResponse> userlist = findalluser.stream()
                 .map(m-> new UserDto.UserLoginListResponse(m.getUserNick(),m.getUserMbti()))
                 .collect(Collectors.toList());
-
         return userlist;
+    }
 
+    // 사용자 닉네임으로 사용자 겁색
+    public User getUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUserNick(username)
+                .orElseThrow(() -> new UsernameNotFoundException("사용자가 존재하지 않습니다."));
 
     }
 }
