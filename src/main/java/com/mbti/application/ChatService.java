@@ -48,21 +48,32 @@ public class ChatService {
 
     }
 
-    // 수신한 메시지 처리
+    // 메시지 수신 및 송신 처리
     public void processMessage(String senderNick, String receiverNick, String content) {
         User sender = userRepository.findByUserNick(senderNick).orElseThrow(() -> new UserNotFoundException("발신자가 불분명합니다."));
 
         User receiver = userRepository.findByUserNick(receiverNick).orElseThrow(() ->  new UserNotFoundException("수신자가 불분명합니다."));
 
-        WebSocketSession session = getWebSocketSessionByUserId(receiver.getUserId());
-        if(session != null && session.isOpen()) {
+
+        WebSocketSession sendersession = getWebSocketSessionByUserId(sender.getUserId());
+
+        if(sendersession != null && sendersession.isOpen()) {
             try {
-                session.sendMessage(new TextMessage(content));
+                sendersession.sendMessage(new TextMessage(content));
             }catch (IOException e) {
                 System.out.println("메시지 전송 오류" + e.getMessage());
             }
-
         }
+
+        WebSocketSession receiversession = getWebSocketSessionByUserId(receiver.getUserId());
+        if(receiversession !=null && receiversession.isOpen()) {
+            try{
+                receiversession.sendMessage(new TextMessage(content));
+            }catch(IOException e) {
+                System.out.println("메시지 전송 오류" + e.getMessage());
+            }
+        }
+
     }
 
     private WebSocketSession getWebSocketSessionByUserId(Integer userId) {

@@ -43,11 +43,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
          if(session.getAttributes().containsKey("userIds")){
              List<Integer> userIds = (List<Integer>) session.getAttributes().get("userIds");
 
-//              chat 텐티티 생성, 저장 , 채팅방을 Db에 저장 안할거임.
-//             Chatroom chatroom = Chatroom.builder()
-//                     .chatUser(userIds.stream().map(id->userService.getUserById(id)).collect(Collectors.toList()))
-//                     .build();
-
              String chatRoomId = generateChatRoomId(userIds);
 
              // 해당 채팅방에 websocketsession추가
@@ -65,12 +60,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
     }
     private String generateChatRoomId(List<Integer> userIds) {
         Collections.sort(userIds);
-
         return String.join("-", userIds.stream().map(Object::toString).collect(Collectors.toList()));
-
-
     }
-
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
         // 클라이언트에서 메시지를 보내면 호출됨 

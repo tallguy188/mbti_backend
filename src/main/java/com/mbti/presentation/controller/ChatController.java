@@ -57,4 +57,21 @@ public class ChatController {
 
         return ResponseEntity.ok("메시지 수신 성공");
     }
+
+    @Operation(summary = "메시지송신", description = "메시지송신 메소드입니다.")
+    @PostMapping("/send")
+    public ResponseEntity<String> sendMessage(@RequestBody ChatDto.chatMessageDto chatMessageDto) {
+        String senderNick = chatMessageDto.getSenderNick();
+        String receiverNick = chatMessageDto.getReceiverNick();
+        String content = chatMessageDto.getMessageContent();
+
+        // 송신자, 수신자 유효성 검사
+        chatService.validateUser(senderNick, receiverNick);
+
+        // 메시지 송신 처리
+        chatService.processMessage(senderNick, receiverNick, content);
+
+        return ResponseEntity.ok("메시지 송신 성공");
+
+    }
 }

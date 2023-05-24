@@ -23,6 +23,10 @@ public class AppConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/login/userlist")
                 .excludePathPatterns("/register")
                 .excludePathPatterns("/min")
+                .excludePathPatterns("/createChatRoom")
+                .excludePathPatterns("/receive")
+                .excludePathPatterns("/send")
+                .excludePathPatterns("/chat")
                 .excludePathPatterns("/swagger-ui/**"); // Swagger UI 경로 제외
     }
 
