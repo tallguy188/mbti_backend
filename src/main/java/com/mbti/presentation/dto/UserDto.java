@@ -14,7 +14,7 @@ public class UserDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class UserRequestDto{
+    public static class userRequestDto{
         private Integer id;  // idx값, user가 입력하는 id는 nick
         private String nick;   // 이게 유저가 입력하는 아이디
         private String pw;
@@ -27,7 +27,7 @@ public class UserDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public  static class RegisterResponseDto{
+    public  static class registerResponseDto{
        private Integer id;
 
        private String nick;
@@ -42,7 +42,7 @@ public class UserDto {
     @NoArgsConstructor
     @Getter
     @Builder
-    public static class UserLoginResponse {   //토큰의 인코딩 값을 반환
+    public static class userLoginResponseDto {   //토큰의 인코딩 값을 반환
         private String token;  // 토큰안에는 유저의 데이터가 암호화되어 저장
         private String mbti;
     }
@@ -51,7 +51,7 @@ public class UserDto {
     @NoArgsConstructor
     @Getter
     @Builder
-    public static class UserLogoutRequest {
+    public static class userLogoutRequestDto {
         private String nick;
     }
 
@@ -59,7 +59,7 @@ public class UserDto {
     @NoArgsConstructor
     @Getter
     @Builder
-    public static class UserLoginListResponse {
+    public static class userLoginListResponseDto {
         private String nick;
         private String mbti;
 

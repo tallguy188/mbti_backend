@@ -36,7 +36,7 @@ public class UserService {
     private long expireTimeMs = 1000*60*60; // 1시간
 
     // 회원가입
-    public UserDto.RegisterResponseDto register(UserDto.UserRequestDto userRequestDto) {
+    public UserDto.registerResponseDto register(UserDto.userRequestDto userRequestDto) {
 
 
         userRepository.findByUserNick(userRequestDto.getNick()).ifPresent(user -> {
@@ -52,13 +52,13 @@ public class UserService {
                         .build());
 
 
-        return UserDto.RegisterResponseDto.builder().id(user.getUserId())
+        return UserDto.registerResponseDto.builder().id(user.getUserId())
                 .nick(user.getUserNick())
                 .mbti(user.getUserMbti())
                 .build();
     }
     // 로그인
-    public UserDto.UserLoginResponse login(UserDto.UserRequestDto userRequestDto) throws UsernameNotFoundException {
+    public UserDto.userLoginResponseDto login(UserDto.userRequestDto userRequestDto) throws UsernameNotFoundException {
 
         // db에서 유저이름 확인
         User user = userRepository.findByUserNick(userRequestDto.getNick())
@@ -79,13 +79,13 @@ public class UserService {
 
         String usertoken =JwtTokenUtil.createToken(user.getUserNick(),expireTimeMs,secretKey);
         // 두가지 모두 통과하면 토큰 발행
-        return UserDto.UserLoginResponse.builder().token(usertoken)
+        return UserDto.userLoginResponseDto.builder().token(usertoken)
                 .mbti(user.getUserMbti()).build();
     }
 
      // 로그아웃
     @Transactional
-    public void refresh(UserDto.UserLogoutRequest request) {
+    public void refresh(UserDto.userLogoutRequestDto request) {
         String nick = request.getNick();    //getnick이 null을 불러온다.
         System.out.println(nick);
         User user = userRepository.
@@ -103,13 +103,13 @@ public class UserService {
     }
 
     // 로그인한 사용자 리스트 반환
-    public List<UserDto.UserLoginListResponse> loginSearchAll() {
+    public List<UserDto.userLoginListResponseDto> loginSearchAll() {
 
 
         List<User> findalluser = userRepository.findByIsLoggedInIsTrue();
 
-        List<UserDto.UserLoginListResponse> userlist = findalluser.stream()
-                .map(m-> new UserDto.UserLoginListResponse(m.getUserNick(),m.getUserMbti()))
+        List<UserDto.userLoginListResponseDto> userlist = findalluser.stream()
+                .map(m-> new UserDto.userLoginListResponseDto(m.getUserNick(),m.getUserMbti()))
                 .collect(Collectors.toList());
         return userlist;
     }

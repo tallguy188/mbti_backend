@@ -27,7 +27,7 @@ public class ChatController {
 
 
     // 인증된 사용자만 접근할 수 있도록 principle 사용
-    @Operation(summary = "채팅 매칭", description = "채팅방 생성 메소드입니다.")
+    @Operation(summary = "채팅방 생성", description = "채팅방 생성 메소드입니다.")
     @PostMapping("/createChatRoom")
     public ResponseEntity<String> createChatRoom (@RequestBody ChatDto.chatUserDto chatUserDto, Principal principal) {
         String loggedInUsername = principal.getName();
@@ -42,4 +42,19 @@ public class ChatController {
         return ResponseEntity.ok("1대1 채팅방이 생성되었습니다.");
     }
 
+    @Operation(summary = "메시지수신", description = "메시지수신 메소드입니다.")
+    @PostMapping("/receive")
+    public ResponseEntity<String> receiveMessage (@RequestBody ChatDto.chatMessageDto chatMessageDto) {
+
+        String senderNick = chatMessageDto.getSenderNick();
+        String receiverNick = chatMessageDto.getReceiverNick();
+        String content  = chatMessageDto.getMessageContent();
+
+        // 송신자,수신사 유효성 검사
+        chatService.validateUser(senderNick,receiverNick);
+
+        chatService.processMessage(senderNick, receiverNick, content);
+
+        return ResponseEntity.ok("메시지 수신 성공");
+    }
 }

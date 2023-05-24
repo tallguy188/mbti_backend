@@ -23,29 +23,29 @@ public class UserController {
 
     @Operation(summary = "회원가입 메소드", description = "회원가입 메소드입니다.")
     @PostMapping("/register")
-    public ResponseEntity<Response<UserDto.RegisterResponseDto>> register(@RequestBody UserDto.UserRequestDto userRequestDto) {
+    public ResponseEntity<Response<UserDto.registerResponseDto>> register(@RequestBody UserDto.userRequestDto userRequestDto) {
 
-        UserDto.RegisterResponseDto user = userService.register(userRequestDto);
-        return ResponseEntity.ok().body(Response.success(new UserDto.RegisterResponseDto(user.getId(),user.getNick(),user.getMbti())));
+        UserDto.registerResponseDto user = userService.register(userRequestDto);
+        return ResponseEntity.ok().body(Response.success(new UserDto.registerResponseDto(user.getId(),user.getNick(),user.getMbti())));
     }
     @Operation(summary = "로그아웃 메소드",description = "로그아웃 메소드입니다.")
     @PostMapping("/min")
-    public ResponseEntity<Response<HttpStatus>> refresh(@RequestBody UserDto.UserLogoutRequest userLogoutRequest) {
+    public ResponseEntity<Response<HttpStatus>> refresh(@RequestBody UserDto.userLogoutRequestDto userLogoutRequestDto) {
         System.out.println("method called");
-        userService.refresh(userLogoutRequest);
+        userService.refresh(userLogoutRequestDto);
         return ResponseEntity.ok().body(Response.success(HttpStatus.OK));
     }
     @Operation(summary = "로그인 메소드", description = "로그인 메소드입니다.")
     @PostMapping("/login")
-    public ResponseEntity<Response<UserDto.UserLoginResponse>> login(@RequestBody UserDto.UserRequestDto userRequestDto) {
+    public ResponseEntity<Response<UserDto.userLoginResponseDto>> login(@RequestBody UserDto.userRequestDto userRequestDto) {
 
-       UserDto.UserLoginResponse user = userService.login(userRequestDto);
-        return ResponseEntity.ok().body(Response.success(new UserDto.UserLoginResponse(user.getToken(), user.getMbti())));
+       UserDto.userLoginResponseDto user = userService.login(userRequestDto);
+        return ResponseEntity.ok().body(Response.success(new UserDto.userLoginResponseDto(user.getToken(), user.getMbti())));
     }
 
     @Operation(summary = "로그인 회원 전체조회 메소드", description = "로그인 회원조회 메소드입니다.")
     @GetMapping("/login/userlist")
-    public List<UserDto.UserLoginListResponse>loginSearchAll() {
+    public List<UserDto.userLoginListResponseDto>loginSearchAll() {
         return userService.loginSearchAll();
     }
 

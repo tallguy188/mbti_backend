@@ -22,8 +22,10 @@ public class ChatDto {
     @AllArgsConstructor
     @Builder
     public static class chatMessageDto {
-        private String chatId;
-        private List<String> chatUser;   // 사용자 정보를 Nick으로 받아옴.
+
+        private String receiverNick;   // 사용자 정보를 Nick으로 받아옴.
+
+        private String senderNick;
         private String messageContent;
     }
 
