@@ -47,3 +47,8 @@ jwt:
   token:
     secret: hello
 
+
+security:
+  headers:
+    frame: false
+

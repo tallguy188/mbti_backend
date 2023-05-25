@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -18,25 +19,25 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.headers().frameOptions().sameOrigin();
-        http
-                .httpBasic().disable()
-                .csrf().disable()
-                .cors().and()
-                .authorizeRequests()
-                .antMatchers("/register/**").permitAll()
-                .antMatchers("/login/**").permitAll()
-                .antMatchers("/min").permitAll()
-                .antMatchers("/chat").permitAll()
-                .antMatchers("/").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-    }
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.headers().frameOptions().sameOrigin();
+//        http
+//                .httpBasic().disable()
+//                .csrf().disable()
+//                .cors().and()
+//                .authorizeRequests()
+//                .antMatchers("/register/**").permitAll()
+//                .antMatchers("/login/**").permitAll()
+//                .antMatchers("/min").permitAll()
+//                .antMatchers("/chat").permitAll()
+//                .antMatchers("/").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//
+//    }
 
 
 
@@ -64,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //                .and()
 //                .build();
 //    }
-//
+
 //    @Override
 //     protected void configure(HttpSecurity http) throws  Exception {
 //
@@ -74,27 +75,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .httpBasic().disable()
-//                .csrf().disable()
-//                .cors()
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers("/register/**").permitAll()
-//                .antMatchers("/login/**").permitAll()
-//                .antMatchers("/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/")
-//                .invalidateHttpSession(true);
-//    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .httpBasic().disable()
+                .csrf().disable()
+                .cors()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/register/**").permitAll()
+                .antMatchers("/login/**").permitAll()
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true);
+    }
 
 
 }
