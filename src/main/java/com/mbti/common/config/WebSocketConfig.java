@@ -1,6 +1,6 @@
 package com.mbti.common.config;
 
-import com.mbti.presentation.controller.WebSocketHandler;
+import com.mbti.presentation.controller.ChatHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -8,17 +8,16 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 @Configuration
-@EnableWebSocket
 @RequiredArgsConstructor
+@EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
-
-    private final WebSocketHandler webSocketHandler;
-
+    private final ChatHandler chatHandler;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketHandler, "/chat")
-                .setAllowedOrigins("http://localhost:9991")
+
+        registry.addHandler(chatHandler, "/chat")
+                .setAllowedOriginPatterns("*")
                 .withSockJS();
     }
 
