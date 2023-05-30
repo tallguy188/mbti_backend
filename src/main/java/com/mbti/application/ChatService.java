@@ -3,7 +3,6 @@ package com.mbti.application;
 import com.mbti.common.exception.UserNotFoundException;
 import com.mbti.domain.entity.Chatroom;
 import com.mbti.domain.entity.User;
-import com.mbti.domain.repository.ChatRepository;
 import com.mbti.domain.repository.UserRepository;
 import com.mbti.domain.repository.WebSocketRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,6 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

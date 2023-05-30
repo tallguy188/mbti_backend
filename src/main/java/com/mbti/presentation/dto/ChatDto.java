@@ -19,14 +19,15 @@ public class ChatDto {
 
 
     @Getter
+    @Setter
     @AllArgsConstructor
     @Builder
     public static class chatMessageDto {
 
-        private String receiverNick;   // 사용자 정보를 Nick으로 받아옴.
+        private String roomId;
 
-        private String senderNick;
-        private String messageContent;
+        private String writer;
+        private String message;
     }
 
     @Getter

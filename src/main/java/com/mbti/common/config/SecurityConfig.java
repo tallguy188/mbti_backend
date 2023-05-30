@@ -19,28 +19,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig{
 
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.headers().frameOptions().sameOrigin();
-//        http
-//                .httpBasic().disable()
-//                .csrf().disable()
-//                .cors().and()
-//                .authorizeRequests()
-//                .antMatchers("/register/**").permitAll()
-//                .antMatchers("/login/**").permitAll()
-//                .antMatchers("/min").permitAll()
-//                .antMatchers("/chat").permitAll()
-//                .antMatchers("/").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//
-//    }
-
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity       // SecurityFilterChain에서 요청에 접근할 수 있어서 인증, 인가 서비스에 사용
@@ -62,14 +40,6 @@ public class SecurityConfig{
                 .and()
                 .build();
     }
-
-//    @Override
-//     protected void configure(HttpSecurity http) throws  Exception {
-//
-//        http.headers().frameOptions().sameOrigin();
-//
-//    }
-
 
 
 //    @Override
